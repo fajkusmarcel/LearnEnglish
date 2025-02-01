@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Test slovní zásoby</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <h1>Test slovní zásoby</h1>
+        <form action="/submit_test" method="POST" class="questions-container">
+            {% for word in words %}
+                <input type="hidden" name="test_word_{{ loop.index }}" value="{{ word[0] }};{{ word[1] }}">
+                <div class="question-item">
+                    <label>{{ word[0] }}</label>
+                    <input type="text" name="answer_{{ word[0] }}" class="answer-input">
+                </div>
+            {% endfor %}
+            <button type="submit">Odeslat odpovědi</button>
+        </form>
+    </div>
+</body>
+</html>

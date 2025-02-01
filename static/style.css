@@ -1,0 +1,176 @@
+/* Základní stylování */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Kontejner stránky */
+.page-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Formulářové řádky */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+label {
+    flex: 1;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+input[type="number"],
+input[type="text"] {
+    flex: 0.5;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Výběr časových tvarů */
+.fieldset-container {
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    background-color: #fafafa;
+    margin-bottom: 15px;
+}
+
+legend {
+    font-weight: bold;
+    padding: 0 5px;
+}
+
+/* Flexbox pro tlačítka */
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    margin: 10px 5px;
+    min-width: 150px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Tabulky */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Stylování výsledků */
+.correct {
+    color: green;
+    font-weight: bold;
+}
+
+.incorrect {
+    color: red;
+    font-weight: bold;
+}
+
+/* Responzivní úpravy */
+
+/* Pro tablety (maximální šířka 768px) */
+@media (max-width: 768px) {
+    .page-container {
+        padding: 15px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    label {
+        margin-bottom: 5px;
+    }
+
+    input[type="number"],
+    input[type="text"] {
+        width: 100%;
+        flex: unset;
+    }
+
+    .button-row {
+        justify-content: center;
+    }
+
+    button {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+}
+
+/* Pro mobilní zařízení (maximální šířka 480px) */
+@media (max-width: 480px) {
+    .page-container {
+        padding: 10px;
+    }
+
+    .form-row {
+        margin-bottom: 10px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+}

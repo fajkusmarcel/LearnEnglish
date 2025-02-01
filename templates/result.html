@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Výsledek testu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <h1>Výsledek testu</h1>
+        {% if results %}
+            <table>
+                <tr>
+                    <th>Slovo</th>
+                    <th>Odpověď uživatele</th>
+                    <th>Správná odpověď</th>
+                    <th>Status</th>
+                </tr>
+                {% for result in results %}
+                    <tr>
+                        <td>{{ result.word }}</td>
+                        <td class="{{ 'correct' if result.status == 'Správně' else 'incorrect' }}">{{ result.user_input }}</td>
+                        <td>{{ result.correct_answer }}</td>
+                        <td class="{{ 'correct' if result.status == 'Správně' else 'incorrect' }}">{{ result.status }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>{{ message }}</p>
+        {% endif %}
+        <br>
+        <a href="/">Zpět na hlavní stránku</a>
+    </div>
+</body>
+</html>

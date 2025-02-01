@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Procvičování sloves</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <h1>Test sloves</h1>
+        <form action="/submit_verbs_test" method="POST">
+            {% for question in questions %}
+                <div class="question-item">
+                    <p>Přelož sloveso <strong>{{ question.word }}</strong> ve tvaru <strong>{{ question.tense }}</strong>:</p>
+                    <input type="hidden" name="test_word_{{ loop.index }}" value="{{ question.word }};{{ question.tense }};{{ question.correct_answer }}">
+                    <input type="text" name="answer_{{ question.word }}" >
+                </div>
+            {% endfor %}
+            <button type="submit">Odeslat odpovědi</button>
+        </form>
+    </div>
+</body>
+</html>

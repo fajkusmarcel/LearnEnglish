@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Procvičování slovní zásoby</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <h1>Procvičování slovní zásoby</h1>
+
+        <!-- Výběr kategorie -->
+        <form method="POST">
+            <label for="category">Vyberte kategorii:</label>
+            <select id="category" name="category" onchange="this.form.submit()">
+                {% for key, value in categories.items() %}
+                    <option value="{{ key }}" {% if selected_category == key %}selected{% endif %}>{{ value }}</option>
+                {% endfor %}
+            </select>
+        </form>
+
+        <form id="test-form" method="POST">
+            <input type="hidden" name="category" value="{{ selected_category }}">
+        
+            <div class="form-row">
+                <label for="num_words">Počet slov k procvičení:</label>
+                <input type="number" id="num_words" name="num_words" min="1" max="50" value="10" required>
+            </div>
+        
+            <!-- Výběr časových tvarů pro slovesa -->
+            {% if selected_category == "verbs" %}
+            <div class="fieldset-container">
+                <fieldset>
+                    <legend>Vyberte časové tvary k procvičení:</legend>
+                    <label><input type="checkbox" name="tense" value="present" checked> Přítomný čas</label><br>
+                    <label><input type="checkbox" name="tense" value="present_continuous" > Přítomný průběhový</label><br>
+                    <label><input type="checkbox" name="tense" value="past" > Minulý čas</label><br>
+                    <label><input type="checkbox" name="tense" value="past_continuous" > Minulý průběhový</label><br>
+                    <label><input type="checkbox" name="tense" value="future" > Budoucí čas</label>
+                </fieldset>
+            </div>
+            {% endif %}
+        
+            <!-- Tlačítka pro odeslání formuláře -->
+            <div class="button-row">
+                <button type="submit" onclick="setFormAction('/start_test')">Začít test</button>
+                <button type="submit" onclick="setFormAction('/start_wrong_test')">Test z chybně zodpovězených slov</button>
+                <button type="submit" formaction="/view_wrong_words">Zobrazit chybná slovíčka</button>
+            </div>
+        </form>
+
+
+
+        <!-- Statistiky -->
+        <div class="statistics">
+            <p>Celkový počet slov: {{ total_words }}</p>
+            <p>Naučená slova: {{ learned_count }}</p>
+            <p>Chybně zodpovězená slova: {{ wrong_count }}</p>
+        </div>
+    </div>
+
+    <script>
+        function setNumWords(hiddenInputId) {
+            const numWords = document.getElementById('num_words').value;
+            document.getElementById(hiddenInputId).value = numWords;
+        }
+
+        function setFormAction(actionUrl) {
+            document.getElementById('test-form').action = actionUrl;
+        }
+    </script>
+</body>
+</html>
