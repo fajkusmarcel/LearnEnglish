@@ -18,9 +18,9 @@ body {
 }
 
 /* Formulářové řádky */
-.form-row {
-    display: flex;
-    flex-wrap: wrap;
+.form-row,
+.question-item {
+    display: flex;    
     align-items: center;
     margin-bottom: 15px;
 }
@@ -33,7 +33,7 @@ label {
 
 input[type="number"],
 input[type="text"] {
-    flex: 0.5;
+    flex: 1;
     padding: 8px;
     font-size: 16px;
     border: 1px solid #ccc;

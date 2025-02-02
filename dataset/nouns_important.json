@@ -58,5 +58,61 @@
     {
         "word": "závazek",
         "correct_answer": "obligation"
+    },
+    {
+        "word": "smlouva",
+        "correct_answer": "contract"
+    },
+    {
+        "word": "vývoj",
+        "correct_answer": "development"
+    },
+    {
+        "word": "povolení",
+        "correct_answer": "permit"
+    },
+    {
+        "word": "moment",
+        "correct_answer": "torque"
+    },
+    {
+        "word": "analytik",
+        "correct_answer": "analyst"
+    },
+    {
+        "word": "výpočet",
+        "correct_answer": "computation"
+    },
+    {
+        "word": "dodavatel",
+        "correct_answer": "supplier"
+    },
+    {
+        "word": "dohoda",
+        "correct_answer": "agreement"
+    },
+    {
+        "word": "trvanlivost",
+        "correct_answer": "durability"
+    },
+    {
+        "word": "kontrola přístupu",
+        "correct_answer": "access control"
+    },
+    {
+        "word": "propustnost",
+        "correct_answer": "throughput"
+    },
+    {
+        "word": "nabídka",
+        "correct_answer": "offer"
+    },
+    {
+        "word": "odpor",
+        "correct_answer": "resistance"
+    },
+    {
+        "word": "souřadnice",
+        "correct_answer": "coordinates"
     }
 ]

@@ -13,7 +13,7 @@
                 <input type="hidden" name="test_word_{{ loop.index }}" value="{{ word[0] }};{{ word[1] }}">
                 <div class="question-item">
                     <label>{{ word[0] }}</label>
-                    <input type="text" name="answer_{{ word[0] }}" class="answer-input">
+                    <input type="text" name="answer_{{ word[0] }}" autocomplete="off" class="answer-input">
                 </div>
             {% endfor %}
             <button type="submit">Odeslat odpovědi</button>
