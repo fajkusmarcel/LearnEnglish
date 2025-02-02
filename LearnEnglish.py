@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, jsonify
+
 import csv
 import json
 import os
@@ -7,17 +8,33 @@ import random
 app = Flask(__name__)
 
 # Globální proměnné
-categories = {"nouns": "Podstatná jména", "verbs": "Slovesa", "phrases": "Fráze"}
+categories = {
+    "nouns": "Podstatná jména",
+    "verbs": "Slovesa",
+    "phrases": "Fráze",
+    "adjectives": "Přídavná jména"  # Nová kategorie
+}
+
 words = []
 verbs = []
+
 learned_words = set()
 wrong_words = []
+important_words = []
+
+
 WRONG_NOUNS_JSON = "wrong_nouns.json"
 selected_category = "nouns"  # Výchozí kategorie
 
 # Cesty k souborům
-WRONG_ANSWERS_FILE = "wrong_answers.csv"
+WRONG_ANSWERS_FILE = "dataset/wrong_answers.csv"
+NOUN_LEARNED_FILE = "dataset/noun_learned.csv"
+NOUN_WRONG_FILE = "dataset/noun_wrong.csv"
+NOUN_IMPORTANT_FILE = "dataset/noun_important.csv"
 
+VERBS_LEARNED_FILE = "dataset/verbs_learned.csv"
+VERBS_WRONG_FILE = "dataset/verbs_wrong.csv"
+VERBS_IMPORTANT_FILE = "dataset/verbs_important.csv"
 
 # ROUTY =========================================================
 
@@ -34,15 +51,15 @@ def index():
     if not selected_category:
         selected_category = 'nouns'
 
-    print(f"Aktuálně vybraná kategorie: {selected_category}")
-
-    load_words(selected_category)
+    load_noun(selected_category)
     load_learned_words(selected_category)
     load_wrong_words(selected_category)
+    load_important_words(selected_category)
 
     total_words = len(words)
     learned_count = len(learned_words)
     wrong_count = len(wrong_words)
+    important_count = len(important_words)
 
     return render_template(
         'index.html',
@@ -50,7 +67,8 @@ def index():
         selected_category=selected_category,
         total_words=total_words,
         learned_count=learned_count,
-        wrong_count=wrong_count
+        wrong_count=wrong_count,
+        important_count=important_count
     )
 
 
@@ -58,11 +76,13 @@ def index():
 def start_test():
     category = request.form.get('category', 'nouns')
     num_words = int(request.form.get('num_words', 10))
+    
+    load_learned_words(category)
+    load_wrong_words(category)
+    load_important_words(category)
 
     if category == "verbs":
-        
-        load_verbs()
-        
+        load_verbs(category)    
         if not verbs:
             return render_template('result.html', message="---Nejsou dostupná žádná slovesa k procvičení.")
 
@@ -86,10 +106,7 @@ def start_test():
 
         return render_template('verbs_test.html', questions=questions)
     else:
-        load_words(category)
-        load_learned_words(category)
-        load_wrong_words(category)
-
+        load_noun(category)
         if not words:
             return render_template('result.html', message="Nejsou dostupná žádná slova k procvičení.")
 
@@ -103,11 +120,11 @@ def start_wrong_test():
 
     # Načtení dat a špatně zodpovězených slov podle kategorie
     if category == "verbs":
-        load_verbs()
+        load_verbs(category)
         load_wrong_words(category)
         available_wrong_words = [verb for verb in verbs if verb["word"] in wrong_words]
     else:
-        load_words(category)
+        load_noun(category)
         load_wrong_words(category)
         available_wrong_words = [word for word in words if word[0] in wrong_words]
 
@@ -162,12 +179,12 @@ def submit_test():
                 if word_text in wrong_words:
                     wrong_words.remove(word_text)
                 learned_words.add(word_text)
-                result = {"word": word_text, "correct_answer": correct_answer, "status": "Správně"}
+                result = {"word": word_text, "correct_answer": correct_answer, "status": "Správně", "user_input":user_input}
             else:
                 # Špatná odpověď
                 if word_text not in wrong_words:
                     wrong_words.append(word_text)
-                result = {"word": word_text, "correct_answer": correct_answer, "status": "Špatně"}
+                result = {"word": word_text, "correct_answer": correct_answer, "status": "Špatně", "user_input":user_input}
 
             results.append(result)
 
@@ -226,20 +243,73 @@ def view_wrong_words():
     # Připravit data pro zobrazení
     words_data = []
     if category == "verbs":
-        load_verbs()
+        load_verbs(category)
         words_data = [verb for verb in verbs if verb["word"] in wrong_words]
     else:
-        load_words(category)
+        load_noun(category)
         words_data = [word for word in words if word[0] in wrong_words]
 
     return render_template('wrong_words.html', words=words_data, selected_category=category)
 
 
+@app.route('/view_important_words', methods=['POST'])
+def view_important_words():
+    category = request.form.get('category', 'nouns')
+    load_important_words(category)
+
+    print("-- view_important_words")
+
+    print(len(important_words))
+    print(important_words)
+    if not important_words:
+        return render_template('result.html', message="Nejsou žádná špatně zodpovězená slova k zobrazení.")
+
+    important_word_list = [w["word"] for w in important_words]
+
+    # Připravit data pro zobrazení    
+    words_data = []
+    if category == "verbs":
+        load_verbs(category)
+        words_data = [verb for verb in verbs if verb["word"] in important_word_list]
+    else:
+        load_noun(category)
+        words_data = [word for word in words if word[0] in important_word_list]        
+
+    print(words_data)
+    print("-- render")
+    return render_template('important_words.html', words=words_data, selected_category=category)
+
+@app.route('/save_important_word', methods=['POST'])
+def save_important_word():
+    data = request.get_json()
+    category = selected_category
+    word = data.get('word')
+    correct_answer = data.get('correct_answer')
+
+    # Cesta k souboru
+    important_filename = f"dataset/{category}_important.json"
+
+    # Načtení existujících dat
+    if os.path.exists(important_filename):
+        with open(important_filename, 'r', encoding='utf-8') as file:
+            important_words = json.load(file)
+    else:
+        important_words = []
+
+    # Přidání nového slova, pokud ještě není uloženo
+    if not any(w["word"] == word for w in important_words):
+        important_words.append({"word": word, "correct_answer": correct_answer})
+
+        # Uložení do souboru
+        with open(important_filename, 'w', encoding='utf-8') as file:
+            json.dump(important_words, file, ensure_ascii=False, indent=4)
+
+    return jsonify({"success": True})
 
 #PODSTATNA JMENA ================================================
-def load_words(category):
+def load_noun(category):
     global words
-    filename = f"{category}.csv"
+    filename = f"dataset/{category}.csv"
     words = []
     try:
         with open(filename, encoding='utf-8') as file:
@@ -251,7 +321,7 @@ def load_words(category):
         print(f"Soubor {filename} nebyl nalezen.")
 
 def select_test_words(num_words, category):
-    load_words(category)
+    load_noun(category)
     load_wrong_words(category)
 
     # Výběr špatně zodpovězených slov
@@ -277,13 +347,14 @@ def select_test_words(num_words, category):
 
 # Funkce pro získání názvů souborů na základě kategorie
 def get_json_filenames(category):
-    return f"learned_{category}.json", f"wrong_{category}.json"
+    #return f"learned_{category}.json", f"wrong_{category}.json"
+    return f"dataset/{category}_learned.json", f"dataset/{category}_wrong.json", f"dataset/{category}_important.json"
 
 # Načtení naučených slov pro danou kategorii
 def load_learned_words(category):
     global learned_words
     learned_words = set()
-    learned_filename, _ = get_json_filenames(category)
+    learned_filename = get_json_filenames(category)[0]
     if os.path.exists(learned_filename):
         with open(learned_filename, 'r', encoding='utf-8') as file:
             learned_words = set(json.load(file))
@@ -292,31 +363,53 @@ def load_learned_words(category):
 def load_wrong_words(category):
     global wrong_words
     wrong_words = []
-    _, wrong_filename = get_json_filenames(category)
+    wrong_filename = get_json_filenames(category)[1]
     if os.path.exists(wrong_filename):
         with open(wrong_filename, 'r', encoding='utf-8') as file:
             wrong_words = json.load(file)
 
+# Načtení dulezitych slov pro danou kategorii
+def load_important_words(category):
+    global important_words
+    important_words = []
+    important_filename = get_json_filenames(category)[2]
+    print("  Nacitam important")
+    print(important_filename)
+
+    if os.path.exists(important_filename):
+        with open(important_filename, 'r', encoding='utf-8') as file:
+            important_words = json.load(file)
+
 # Uložení naučených slov pro danou kategorii
 def save_learned_words(category):
-    learned_filename, _ = get_json_filenames(category)
+    learned_filename = get_json_filenames(category)[0]
     with open(learned_filename, 'w', encoding='utf-8') as file:
         json.dump(list(learned_words), file, ensure_ascii=False, indent=4)
 
 # Uložení chybně zodpovězených slov pro danou kategorii
 def save_wrong_words(category):
-    _, wrong_filename = get_json_filenames(category)
+    wrong_filename = get_json_filenames(category)[1]
     with open(wrong_filename, 'w', encoding='utf-8') as file:
         json.dump(wrong_words, file, ensure_ascii=False, indent=4)
+
+# Uložení dulezitych slov pro danou kategorii
+def save_important_words(category):
+    important_filename = get_json_filenames(category)[2]
+    with open(important_filename, 'w', encoding='utf-8') as file:
+        json.dump(important_filename, file, ensure_ascii=False, indent=4)
+
+import json
+import os
 
 
 
 # VERBS
-def load_verbs():
+def load_verbs(category):
     global verbs
     verbs = []
+    filename = f"dataset/{category}.csv"
     try:
-        with open('verbs.csv', encoding='utf-8') as file:
+        with open(filename, encoding='utf-8') as file:
             reader = csv.reader(file, delimiter=';')
             for row in reader:
                 # Přeskočíme prázdné řádky nebo řádky s nesprávným počtem sloupců
@@ -337,33 +430,6 @@ def load_verbs():
         print("Soubor verbs.csv nebyl nalezen.")
     except Exception as e:
         print(f"Chyba při načítání souboru: {e}")
-
-
-
-
-import random
-
-
-
-def select_test_words(num_words, category):
-    load_words(category)
-    load_wrong_words(category)
-
-    # Výběr špatně zodpovězených slov
-    num_wrong = min(max(1, num_words // 5), len(wrong_words))
-    wrong_sample = random.sample(
-        [word for word in words if word[0] in wrong_words], 
-        min(num_wrong, len(wrong_words))
-    )
-
-    # Výběr zbývajících slov
-    remaining_words = [word for word in words if word[0] not in wrong_words]
-    remaining_count = num_words - len(wrong_sample)
-
-    normal_sample = random.sample(remaining_words, min(remaining_count, len(remaining_words))) if remaining_count > 0 else []
-
-    return wrong_sample + normal_sample
-
 
 
 

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Důležitá  slovíčka</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <h1>Důležitá slovíčka</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Slovo (česky)</th>
+                    <th>Překlad (anglicky)</th>
+                    {% if selected_category == "verbs" %}
+                    <th>Přítomný čas</th>
+                    <th>Přítomný průběhový</th>
+                    <th>Minulý čas</th>
+                    <th>Minulý průběhový</th>
+                    <th>Budoucí čas</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for word in words %}
+                <tr>
+                    <!-- Zobrazení českého slova a anglického překladu -->
+                    <td>{{ word["word"] if selected_category == "verbs" else word[0] }}</td>
+                    <td>
+                        {% if selected_category == "verbs" %}
+                        {{ word["present"] }}
+                        {% else %}
+                        {{ word[1] }} <!-- Předpoklad: druhý sloupec v CSV obsahuje anglický překlad -->
+                        {% endif %}
+                    </td>
+
+                    <!-- Časové tvary pro slovesa -->
+                    {% if selected_category == "verbs" %}
+                    <td>{{ word["present"] }}</td>
+                    <td>{{ word["present_continuous"] }}</td>
+                    <td>{{ word["past"] }}</td>
+                    <td>{{ word["past_continuous"] }}</td>
+                    <td>{{ word["future"] }}</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="/">Zpět na hlavní stránku</a>
+    </div>
+</body>
+</html>

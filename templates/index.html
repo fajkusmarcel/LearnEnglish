@@ -46,6 +46,7 @@
                 <button type="submit" onclick="setFormAction('/start_test')">Začít test</button>
                 <button type="submit" onclick="setFormAction('/start_wrong_test')">Test z chybně zodpovězených slov</button>
                 <button type="submit" formaction="/view_wrong_words">Zobrazit chybná slovíčka</button>
+                <button type="submit" formaction="/view_important_words">Zobrazit důležitá slovíčka</button>
             </div>
         </form>
 
@@ -56,6 +57,7 @@
             <p>Celkový počet slov: {{ total_words }}</p>
             <p>Naučená slova: {{ learned_count }}</p>
             <p>Chybně zodpovězená slova: {{ wrong_count }}</p>
+            <p>Důležitá  slova: {{ important_count }}</p>
         </div>
     </div>
 

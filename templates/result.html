@@ -15,6 +15,7 @@
                     <th>Odpověď uživatele</th>
                     <th>Správná odpověď</th>
                     <th>Status</th>
+                    <th>Akce</th>
                 </tr>
                 {% for result in results %}
                     <tr>
@@ -22,6 +23,9 @@
                         <td class="{{ 'correct' if result.status == 'Správně' else 'incorrect' }}">{{ result.user_input }}</td>
                         <td>{{ result.correct_answer }}</td>
                         <td class="{{ 'correct' if result.status == 'Správně' else 'incorrect' }}">{{ result.status }}</td>
+                        <td class="{{ 'correct' if result.status == 'Správně' else 'incorrect' }}">
+                            <button onclick="saveImportantWord('{{ selected_category }}', '{{ result.word }}', '{{ result.correct_answer }}', '{{ result.word }}')">Uložit</button>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>
@@ -31,5 +35,36 @@
         <br>
         <a href="/">Zpět na hlavní stránku</a>
     </div>
+
+
+    <script>
+        function saveImportantWord(category, word, correctAnswer, rowId) {
+            fetch('/save_important_word', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    category: category,
+                    word: word,
+                    correct_answer: correctAnswer
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {                    
+                    // Změna stylu řádku jako indikace úspěchu
+                    document.getElementById(`word-row-${rowId}`).style.backgroundColor = '#d4edda';
+                } else {
+                    console.error('Chyba:', error);
+                }
+            })
+            .catch(error => {
+                console.error('Chyba:', error);                
+            });
+        }
+    </script>
+
 </body>
+
 </html>
