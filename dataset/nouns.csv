@@ -65,7 +65,6 @@ dodatek;addendum
 dodavatel;supplier
 dohled;supervision
 dohoda;agreement
-doktorand;PhD student
 dokumentace;documentation
 dopad;impact
 dotační program;funding program
@@ -166,7 +165,6 @@ laboratorní zdroj;lab power supply
 laboratoř;laboratory
 laser;laser
 latence;latency
-leták;flyer
 lhůta;deadline
 licence;license
 limita;limit
@@ -187,7 +185,6 @@ metodika;methodology
 metodologie;methodology
 metrika;metric
 mikroskop;microscope
-míra;measure
 model;model
 modul;module
 modulace;modulation
@@ -199,7 +196,6 @@ multimetr;multimeter
 mzda;wage
 nabídka;offer
 náhradní díl;spare part
-náklad;cost
 napětí;voltage
 nastavení;setting
 návratnost;return
@@ -208,23 +204,20 @@ názor;opinion
 neurální síť;neural network
 norma;norm
 notebook;notebook
-obhajoba;defense
 objednávka;order
-objektivita;objectivity
 objem;volume
 obnova;recovery
 obrana;defense
 obsah;contents
 odběratel;buyer
 odborník;expert
-odborný asistent;lecturer
 oddělení;department
 odečet;reading
 odezva;response
 odpor;resistance
 odpověď;answer
 odpovědnost;responsibility
-odrušení;filtering
+filtrování;filtering
 odstavec;paragraph
 ochrana;protection
 ochranná známka;trademark
@@ -267,7 +260,6 @@ poplatek;fee
 porada;council
 porovnání;comparison
 porušení;violation
-posouzení;evaluation
 postoj;attitude
 postup;procedure
 povolení;permit
@@ -295,7 +287,6 @@ průmysl;industry
 průmyslový vzor;industrial design
 předmět;subject
 přednáška;lecture
-předpis;regulation
 přenos;transfer
 přepětí;overvoltage
 přesnost;accuracy
@@ -305,7 +296,7 @@ příjem;income
 příležitost;opportunity
 příloha;appendix
 připojení;connection
-připomínka;comment
+komentář;comment
 publikace;publication
 publikování;publishing
 python;Python
@@ -334,7 +325,7 @@ rušení;interference
 rychlost;speed
 řadič;controller
 řadič clusteru;cluster controller
-řemen;belt
+pás;belt
 řešitel;principal investigator
 řetěz;chain
 sdílení;sharing
@@ -370,13 +361,12 @@ soubor;file
 součástka;part
 součet;sum
 součin;product
-soud;court
 souřadnice;coordinates
 specifikace;specification
 spektrální analyzátor;spectrum analyzer
 spektrometr;spectrometer
 spínač;switch
-spoj;joint
+spoj;connection
 společnost;company
 spolupráce;collaboration
 spor;dispute
@@ -422,7 +412,6 @@ trvanlivost;durability
 tuhost;stiffness
 tvar;shape
 účast;participation
-účetnictví;accounting
 údržba;maintenance
 ukázka;demonstration
 úkol;task
@@ -455,7 +444,7 @@ vodní elektrárna;hydroelectric power plant
 výbor;board
 výdaj;expense
 vyhláška;ordinance
-vyhodnocení;risk assessment
+vyhodnocení;evaluation
 výkon;power
 výnos;revenue
 výpočet;computation
@@ -478,7 +467,6 @@ zákon;law
 záloha;backup
 záložka;bookmark
 záměr;intention
-zápis;minutes
 záruka;guarantee
 zátěž;load
 závada;fault

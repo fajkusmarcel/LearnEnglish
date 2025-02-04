@@ -13,7 +13,7 @@
                 <div class="question-item">
                     <p>Přelož sloveso <strong>{{ question.word }}</strong> ve tvaru <strong>{{ question.tense }}</strong>:</p>
                     <input type="hidden" name="test_word_{{ loop.index }}" value="{{ question.word }};{{ question.tense }};{{ question.correct_answer }}">
-                    <input type="text" name="answer_{{ question.word }}" >
+                    <input type="text" name="answer_{{ question.word }}" autocomplete="off"  >
                 </div>
             {% endfor %}
             <button type="submit">Odeslat odpovědi</button>

@@ -114,5 +114,37 @@
     {
         "word": "souřadnice",
         "correct_answer": "coordinates"
+    },
+    {
+        "word": "postoj",
+        "correct_answer": "attitude"
+    },
+    {
+        "word": "údržba",
+        "correct_answer": "maintenance"
+    },
+    {
+        "word": "tlak",
+        "correct_answer": "pressure"
+    },
+    {
+        "word": "odpovědnost",
+        "correct_answer": "responsibility"
+    },
+    {
+        "word": "rozeznávání",
+        "correct_answer": "recognition"
+    },
+    {
+        "word": "klasifikace",
+        "correct_answer": "classification"
+    },
+    {
+        "word": "kvantita",
+        "correct_answer": "quantity"
+    },
+    {
+        "word": "hodnocení",
+        "correct_answer": "assessment"
     }
 ]
