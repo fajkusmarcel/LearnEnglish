@@ -170,7 +170,3 @@ Pokud aplikace funguje, je vhodné:
 - Optimalizovat konfiguraci pro větší zátěž.
 
 ---
-
-Tímto by měla být tvá aplikace plně nasazená a dostupná přes Apache server! 😊
-
- 

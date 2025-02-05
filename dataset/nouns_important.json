@@ -146,5 +146,13 @@
     {
         "word": "hodnocení",
         "correct_answer": "assessment"
+    },
+    {
+        "word": "pravděpodobnost",
+        "correct_answer": "probability"
+    },
+    {
+        "word": "obsah",
+        "correct_answer": "contents"
     }
 ]

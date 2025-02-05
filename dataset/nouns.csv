@@ -1,5 +1,4 @@
-﻿ČESKY;ANGLICKY
-abstrakt;abstract
+﻿abstrakt;abstract
 adaptér;adapter
 adresář;directory
 algoritmus;algorithm
@@ -28,7 +27,6 @@ bakalářka;bachelor's thesis
 bezpečnost;safety
 bibliografie;bibliography
 biometrie;biometrics
-brožura;brochure
 certifikát;certificate
 cíl;goal
 citace;citation
@@ -41,7 +39,6 @@ cvičení;exercise
 článek;article
 databáze;database
 datová analýza;data analysis
-datový bod;data point
 datový soubor;dataset
 deadline;deadline
 definice;definition
@@ -54,13 +51,12 @@ dešifrování;decryption
 detekce;detection
 detektor;detector
 diagram;diagram
-digitizér;digitizer
 dioda;diode
 diplomka;master's thesis
 disertace;dissertation
 diskuze;discussion
 docent;associate professor
-docker;Docker
+docker;docker
 dodatek;addendum
 dodavatel;supplier
 dohled;supervision
@@ -75,7 +71,6 @@ elektrárna;power plant
 elektřina;electricity
 energetika;power engineering
 enkódování;encoding
-evidence;record-keeping
 experiment;experiment
 faktor;factor
 faktura;invoice
@@ -88,7 +83,6 @@ firma;firm
 firmware;firmware
 forma;form
 formát;format
-franšíza;franchise
 frekvence;frequency
 funkce;function
 garance;warranty
@@ -102,15 +96,12 @@ harmonogram;timeline
 heslo;password
 hlas;voice
 hmotnost;mass
-hodnocení;assessment
 hrozba;threat
 hřídel;shaft
 hustota;density
 hypotéza;hypothesis
-chladivo;coolant
 chyba;error
 chytrý senzor;smart sensor
-induktor;inductor
 infrastruktura;infrastructure
 instituce;institution
 integrace;integration
@@ -119,7 +110,7 @@ interpretace;interpretation
 investice;investment
 izolace;insulation
 jaderná elektrárna;nuclear power plant
-java;Java
+java;java
 jednání;negotiation
 jednotka;unit
 kalibrace;calibration
@@ -147,7 +138,7 @@ konstrukce;construction
 kontakt;contact
 kontejner;container
 kontext;context
-kontrola;inspection
+inspeckce;inspection
 kontrola přístupu;access control
 konzultace;consultation
 konzultant;consultant
@@ -157,7 +148,6 @@ kritérium;criterion
 kritika;critique
 kryptografie;cryptography
 krystal;crystal
-kubernetes;Kubernetes
 kvalita;quality
 kvantita;quantity
 laborant;lab technician
@@ -165,17 +155,14 @@ laboratorní zdroj;lab power supply
 laboratoř;laboratory
 laser;laser
 latence;latency
-lhůta;deadline
 licence;license
 limita;limit
-lineární pohon;linear actuator
-listina;document
-ložisko;bearing
+dokument;document
 magistr;master's graduate
 malware;malware
 materiál;material
 matice;matrix
-matlab;MATLAB
+matlab;matlab
 mazivo;lubricant
 mechanické napětí;stress
 měnič;inverter
@@ -193,9 +180,7 @@ monitor;monitor
 monitorování;monitoring
 motor;motor
 multimetr;multimeter
-mzda;wage
 nabídka;offer
-náhradní díl;spare part
 napětí;voltage
 nastavení;setting
 návratnost;return
@@ -245,16 +230,15 @@ pevnost materiálu;material strength
 plakát;poster
 plán;plan
 plat;salary
+mzda;salary
 platforma;platform
 plyn;gas
 počítač;computer
 podepsání;signing
-podklad;background material
 podpora;support
 pojistka;fuse
 pojištění;insurance
 pokrok;progress
-pokuta;fine
 poloha;position
 poplatek;fee
 porada;council
@@ -272,7 +256,7 @@ prevence;prevention
 prezenční listina;attendance list
 prezentace;presentation
 profesor;professor
-program;agenda
+agenda;agenda
 programování;programming
 projekt;project
 projektor;projector
@@ -299,21 +283,19 @@ připojení;connection
 komentář;comment
 publikace;publication
 publikování;publishing
-python;Python
+python;python
 recenze;review
 regrese;regression
 rektor;rector
 relé;relay
 relevance;relevance
-reologie;rheology
-rešerše;literature review
+literární rešerše;literature review
 rezistor;resistor
 riziko;risk
 robot;robot
 rovnice;equation
 rovnováha;equilibrium
 rozeznávání;recognition
-rozhodce;arbitrator
 rozhodnutí;decision
 rozhovor;interview
 rozhraní;interface
@@ -335,15 +317,12 @@ seminář;seminar
 senzor;sensor
 server;server
 serverovna;server room
-servo;servo
 schéma;scheme
 schůzka;meeting
 schválení;approval
 signál;signal
-signální kabel;signal cable
 síla;force
 simulace;simulation
-simulink;Simulink
 síť;network
 sítnice;retina
 sklad;warehouse
@@ -356,9 +335,8 @@ smír;settlement
 smlouva;contract
 software;software
 solární panel;solar panel
-sondáž;poll
 soubor;file
-součástka;part
+komponenta (součástka);component
 součet;sum
 součin;product
 souřadnice;coordinates
@@ -377,7 +355,6 @@ statistika;statistics
 stránka;page
 strategie;strategy
 strojové učení;machine learning
-stykač;contactor
 svár;weld
 svorkovnice;terminal block
 syllabus;syllabus
@@ -400,7 +377,7 @@ teplota;temperature
 terminologie;terminology
 tester;tester
 testování;testing
-teze;thesis statement
+teze;thesis
 tištěný spoj;printed circuit board
 tlak;pressure
 tok;flow
@@ -450,7 +427,6 @@ výnos;revenue
 výpočet;computation
 výpočetní výkon;computing power
 výsledek;result
-výsledovka;income statement
 výstup;output
 výuka;teaching
 vývoj;development
@@ -472,7 +448,7 @@ zátěž;load
 závada;fault
 závazek;obligation
 záznam;record
-zdroj;power supply
+napájecí zdroj;power supply
 zemnění;grounding
 zesilovač;amplifier
 zeslabení;attenuation
@@ -482,6 +458,6 @@ zkouška;exam
 zkouška pevnosti;strength test
 změna;change
 zpracování;processing
-zpráva;report
+hlášení;report
 zranitelnost;vulnerability
 životnost;lifetime

@@ -150,7 +150,6 @@ upravit (jiný kontext, např. text);I edit;I am editing;I edited;I was editing;
 prohledat;I scan through;I am scanning through;I scanned through;I was scanning through;I will scan through
 přeložit (software, kód);I compile;I am compiling;I compiled;I was compiling;I will compile
 reagovat;I respond;I am responding;I responded;I was responding;I will respond
-validovat (jiný kontext, např. formulář);I validate;I am validating;I validated;I was validating;I will validate
 definovat (jiný kontext, např. funkci);I define;I am defining;I defined;I was defining;I will define
 generovat (další kontext, např. výstupní data);I generate;I am generating;I generated;I was generating;I will generate
 řadit;I order;I am ordering;I ordered;I was ordering;I will order
@@ -174,7 +173,6 @@ roztřídit;I sort out;I am sorting out;I sorted out;I was sorting out;I will so
 zorganizovat;I organize;I am organizing;I organized;I was organizing;I will organize
 navrhovat (jiný kontext, např. řešení);I propose;I am proposing;I proposed;I was proposing;I will propose
 ohodnotit (jiný kontext, např. kvalitu);I assess;I am assessing;I assessed;I was assessing;I will assess
-validovat (další kontext, např. data kvality);I validate;I am validating;I validated;I was validating;I will validate
 archivovat (další kontext, např. hotový projekt);I archive;I am archiving;I archived;I was archiving;I will archive
 simulovat (jiný kontext, např. reálné podmínky);I simulate;I am simulating;I simulated;I was simulating;I will simulate
 dodržet;I comply;I am complying;I complied;I was complying;I will comply
