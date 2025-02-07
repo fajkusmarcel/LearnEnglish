@@ -44,10 +44,11 @@
             <!-- Tlačítka pro odeslání formuláře -->
             <div class="button-row">
                 <button type="submit" onclick="setFormAction('{{ url_for('start_test') }}')">Začít test</button>
-                <button type="submit" onclick="setFormAction('{{ url_for('start__wrong_test') }}')">Test z chybně zodpovězených slov</button>
-                <button type="submit" formaction="'{{ url_for('view_wrong_words') }}'>Zobrazit chybná slovíčka</button>
-                <button type="submit" formaction="'{{ url_for(''{{ url_for('start_test') }}'') }}'">Zobrazit důležitá slovíčka</button>
+                <button type="submit" onclick="setFormAction('{{ url_for('start_wrong_test') }}')">Test z chybně zodpovězených slov</button>
+                <button type="submit" formaction="{{ url_for('view_wrong_words') }}">Zobrazit chybná slovíčka</button>
+                <button type="submit" formaction="{{ url_for('view_important_words') }}">Zobrazit důležitá slovíčka</button>
             </div>
+
         </form>
 
 
