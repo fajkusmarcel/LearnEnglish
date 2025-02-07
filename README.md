@@ -94,7 +94,7 @@ sudo nano /etc/apache2/sites-available/helloworldflaskapache.conf
     DocumentRoot /var/www/HelloWorldFlaskApache
 
     WSGIDaemonProcess helloworldflaskapache python-path=/var/www/HelloWorldFlaskApache
-    WSGIScriptAlias / /var/www/HelloWorldFlaskApache/helloworldflaskapache.wsgi
+    WSGIScriptAlias /helloworld /var/www/HelloWorldFlaskApache/helloworldflaskapache.wsgi
 
     <Directory /var/www/HelloWorldFlaskApache>
         WSGIProcessGroup helloworldflaskapache
@@ -144,12 +144,12 @@ sudo systemctl restart apache2
 
 Otevři aplikaci v prohlížeči na adrese:
 ```
-http://<IP_adresa_serveru>/
+http://<IP_adresa_serveru>/helloworld
 ```
 
 Případně spustď test přímo na serveru:
 ```bash
-curl -v http://localhost/
+curl -v http://localhost/helloworld
 ```
 
 Pokud narazíš na chybu **500 Internal Server Error**, zkontroluj logy Apache:
