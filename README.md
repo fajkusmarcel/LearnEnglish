@@ -100,7 +100,7 @@ sudo nano /etc/apache2/sites-available/learnenglish.conf
 
     # Dalsi aplikace, napr. FlaskApp
     WSGIDaemonProcess flaskapp python-path=/var/www/FlaskApp python-home=/var/www/FlaskApp/venv
-    WSGIScriptAlias /app2 /var/www/FlaskApp/flaskapp.wsgi
+    WSGIScriptAlias /flaskapp /var/www/FlaskApp/flaskapp.wsgi
 
     <Directory /var/www/FlaskApp>
         Require all granted
@@ -124,7 +124,7 @@ sudo chmod -R 755 /var/www/LearnEnglish
 
 ---
 
-## **78. Aktivace konfigurace a restart Apache**
+## **8. Aktivace konfigurace a restart Apache**
 
 ### **Aktivace konfigurace:**
 ```bash
