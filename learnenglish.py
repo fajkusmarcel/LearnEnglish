@@ -262,10 +262,6 @@ def view_important_words():
     category = request.form.get('category', 'nouns')
     load_important_words(category)
 
-    print("-- view_important_words")
-
-    print(len(important_words))
-    print(important_words)
     if not important_words:
         return render_template('result.html', message="Nejsou žádná špatně zodpovězená slova k zobrazení.")
 
@@ -280,8 +276,6 @@ def view_important_words():
         load_noun(category)
         words_data = [word for word in words if word[0] in important_word_list]        
 
-    print(words_data)
-    print("-- render")
     return render_template('important_words.html', words=words_data, selected_category=category)
 
 @app.route('/save_important_word', methods=['POST'])
@@ -292,7 +286,10 @@ def save_important_word():
     correct_answer = data.get('correct_answer')
 
     # Cesta k souboru
-    important_filename = f"dataset/{category}_important.json"
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    important_filename = os.ghpath.join(base_dir, 'dataset', f'{category}_important.json')
+
+    #important_filename = f"dataset/{category}_important.json"
 
     # Načtení existujících dat
     if os.path.exists(important_filename):
@@ -314,7 +311,9 @@ def save_important_word():
 #PODSTATNA JMENA ================================================
 def load_noun(category):
     global words
-    filename = f"dataset/{category}.csv"
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    filename = os.path.join(base_dir, 'dataset', f'{category}.csv')
+    #filename = f"dataset/{category}.csv"
     words = []
     try:
         with open(filename, encoding='utf-8') as file:
@@ -352,8 +351,16 @@ def select_test_words(num_words, category):
 
 # Funkce pro získání názvů souborů na základě kategorie
 def get_json_filenames(category):
-    #return f"learned_{category}.json", f"wrong_{category}.json"
-    return f"dataset/{category}_learned.json", f"dataset/{category}_wrong.json", f"dataset/{category}_important.json"
+    
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+
+    learned_file = os.path.join(base_dir, 'dataset', f'{category}_learned.json')
+    wrong_file = os.path.join(base_dir, 'dataset', f'{category}_wrong.json')
+    important_file = os.path.join(base_dir, 'dataset', f'{category}_important.json')
+
+    return learned_file, wrong_file, important_file
+
+    #return f"dataset/{category}_learned.json", f"dataset/{category}_wrong.json", f"dataset/{category}_important.json"
 
 # Načtení naučených slov pro danou kategorii
 def load_learned_words(category):
@@ -412,7 +419,9 @@ import os
 def load_verbs(category):
     global verbs
     verbs = []
-    filename = f"dataset/{category}.csv"
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    filename = os.ghpath.join(base_dir, 'dataset', f'{category}.csv')
+    #filename = f"dataset/{category}.csv"
     try:
         with open(filename, encoding='utf-8') as file:
             reader = csv.reader(file, delimiter=';')
