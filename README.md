@@ -1,6 +1,6 @@
 # LearnEnglish
 
-# Nasazeni Flask aplikace pres Apache server
+# Nasazeni Flask aplikace na Apache server pomocí WSGI
 
 Tento návod poskytuje kompletní návod pro instalaci Apache, Flask a konfiguraci WSGI pro nasazení jednoduché aplikace Flask na server.
 
