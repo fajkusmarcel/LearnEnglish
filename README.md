@@ -154,7 +154,7 @@ curl -v http://localhost/helloworld
 
 Pokud narazíš na chybu **500 Internal Server Error**, zkontroluj logy Apache:
 ```bash
-sudo tail -f /var/log/apache2/learnenglish_error.log
+sudo tail -f /var/log/apache2/helloworldflaskapache_error.log
 ```
 
 ---
