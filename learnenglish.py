@@ -287,7 +287,7 @@ def save_important_word():
 
     # Cesta k souboru
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    important_filename = os.ghpath.join(base_dir, 'dataset', f'{category}_important.json')
+    important_filename = os.path.join(base_dir, 'dataset', f'{category}_important.json')
 
     #important_filename = f"dataset/{category}_important.json"
 
@@ -406,6 +406,7 @@ def save_wrong_words(category):
 
 # Uložení dulezitych slov pro danou kategorii
 def save_important_words(category):
+    # ZKONTROLOVAT
     base_dir = os.path.dirname(os.path.abspath(__file__))
     important_filename = os.ghpath.join(base_dir, get_json_filenames(category)[2])
 
