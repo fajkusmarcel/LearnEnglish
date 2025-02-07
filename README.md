@@ -69,7 +69,7 @@ import os
 sys.path.insert(0, '/var/www/LearnEnglish')
 # Importuj aplikaci
 try:
-    from app import app as application
+    from learnenglish import app as application
 except Exception as e:
     logging.exception("Chyba při načítání aplikace")
     raise
