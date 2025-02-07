@@ -9,7 +9,7 @@ Tento dokument poskytuje kompletní návod pro instalaci Apache, Flask a konfigu
 ### **Příkazy pro instalaci:**
 ```bash
 sudo apt update
-sudo apt install apache2 libapache2-mod-wsgi-py3 python3-pip
+sudo apt-get install apache2 libapache2-mod-wsgi-py3 python3-pip python3-venv
 ```
 
 ### **Instalace Flasku:**
@@ -26,19 +26,26 @@ pip3 install -r requirements.txt
 
 ## **2. Vytvoření složky pro aplikaci**
 
-Aplikaci ulož do adresáře `/var/www/HelloWorldFlaskApache/`. Příklad struktury projektu:
+Aplikaci ulož do adresáře `/var/www/LearnEnglish/`. Příklad struktury projektu:
 ```
-/var/www/HelloWorldFlaskApache/
-    ├── __init__.py
-    ├── helloworldflaskapache.py
-    └── helloworldflaskapache.wsgi
+/var/www/LearnEnglish/
+    ├── learnenglish.py
+    └── learnenglish.wsgi
 ```
-
+## **3. Vytvoření a aktivace virtuálního prostředí**
+```python
+cd /var/www/LearnEnglish
+python3 -m venv venv
+source venv/bin/activate
+pip install flask
+# Po instalaci potřebných balíčků se můžeš odpojit:
+deactivate
+```
 ---
 
 ## **3. Vytvoření ukázkové Flask aplikace**
 
-### **Soubor `helloworldflaskapache.py`:**
+### **Soubor `learnenglish.py`:**
 ```python
 from flask import Flask
 
@@ -51,26 +58,28 @@ def hello():
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
 ```
+> [!TIP]
+> Případně si stáhněte aplikaci LearnEnglish z GitHUB pomocí příkazu
+```bash
+git clone git@github.com:fajkusmarcel/LearnEnglish.git
+```
+
 
 ---
 
 ## **4. Vytvoření WSGI souboru**
 
-Vytvoř soubor `/var/www/HelloWorldFlaskApache/helloworldflaskapache.wsgi` s následujícím obsahem:
+Vytvoř soubor `/var/www/LearnEnglish/learnenglish.wsgi` s následujícím obsahem:
 
 ```python
 import sys
-import logging
+import os
 
-# Nastavení logů
-logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
-
-# Přidej cestu k aplikaci
-sys.path.insert(0, '/var/www/HelloWorldFlaskApache')
-
+# Cesta k aplikaci
+sys.path.insert(0, '/var/www/LearnEnglish')
 # Importuj aplikaci
 try:
-    from helloworldflaskapache import app as application
+    from app import app as application
 except Exception as e:
     logging.exception("Chyba při načítání aplikace")
     raise
@@ -80,30 +89,35 @@ except Exception as e:
 
 ## **5. Konfigurace Apache**
 
-Vytvoř nebo uprav konfigurační soubor Apache:
+Vytvoř konfigurační soubor Apache:
 
 ```bash
-sudo nano /etc/apache2/sites-available/helloworldflaskapache.conf
+sudo nano /etc/apache2/sites-available/learnenglish.conf
 ```
 
 ### **Obsah konfigurace:**
 ```apache
 <VirtualHost *:80>
-    ServerName 158.196.109.151  # Nahraď IP adresou nebo doménou
+    ServerName 158.196.109.151
 
-    DocumentRoot /var/www/HelloWorldFlaskApache
+    # FlaskApp1
+    WSGIDaemonProcess learnenglish python-path=/var/www/LearnEnglish python-home=/var/www/LearnEnglish/venv
+    WSGIScriptAlias /learnenglish /var/www/LearnEnglish/learnenglish.wsgi
 
-    WSGIDaemonProcess helloworldflaskapache python-path=/var/www/HelloWorldFlaskApache
-    WSGIScriptAlias /helloworld /var/www/HelloWorldFlaskApache/helloworldflaskapache.wsgi
-
-    <Directory /var/www/HelloWorldFlaskApache>
-        WSGIProcessGroup helloworldflaskapache
-        WSGIApplicationGroup %{GLOBAL}
+    <Directory /var/www/LearnEnglish>
         Require all granted
     </Directory>
 
-    ErrorLog ${APACHE_LOG_DIR}/helloworldflaskapache_error.log
-    CustomLog ${APACHE_LOG_DIR}/helloworldflaskapache_access.log combined
+    # Dalsi aplikace, napr. FlaskApp
+    WSGIDaemonProcess flaskapp python-path=/var/www/FlaskApp python-home=/var/www/FlaskApp/venv
+    WSGIScriptAlias /app2 /var/www/FlaskApp/flaskapp.wsgi
+
+    <Directory /var/www/FlaskApp>
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/flaskapps-error.log
+    CustomLog ${APACHE_LOG_DIR}/flaskapps-access.log combined
 </VirtualHost>
 ```
 
@@ -114,8 +128,8 @@ sudo nano /etc/apache2/sites-available/helloworldflaskapache.conf
 Nastav správná práva k souborům aplikace:
 
 ```bash
-sudo chown -R www-data:www-data /var/www/HelloWorldFlaskApache
-sudo chmod -R 755 /var/www/HelloWorldFlaskApache
+sudo chown -R www-data:www-data /var/www/LearnEnglish
+sudo chmod -R 755 /var/www/LearnEnglish
 ```
 
 ---
@@ -124,7 +138,7 @@ sudo chmod -R 755 /var/www/HelloWorldFlaskApache
 
 ### **Aktivace konfigurace:**
 ```bash
-sudo a2ensite helloworldflaskapache.conf
+sudo a2ensite learnenglish.conf
 ```
 
 ### **Restart Apache:**
