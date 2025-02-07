@@ -13,7 +13,28 @@ sudo apt-get install apache2 libapache2-mod-wsgi-py3 python3-pip python3-venv
 
 ---
 
-## **2. Vytvoření složky pro aplikaci**
+## **2. Práva přístupu**
+Nastavení vlastnictví a práv na adresář /var/www.
+
+```bash
+sudo chown -R www-data:www-data /var/www
+sudo chmod -R 775 /var/www
+```
+
+Přidání uživatele franta do skupiny www-data
+```bash
+sudo usermod -a -G www-data franta
+```
+
+Nastavení dědičnosti práv pro skupinu
+```bash
+sudo chmod g+s /var/www
+```
+
+---
+
+
+## **3. Vytvoření složky pro aplikaci**
 
 Aplikaci ulož do adresáře `/var/www/LearnEnglish/`. Příklad struktury projektu:
 ```
@@ -24,7 +45,7 @@ Aplikaci ulož do adresáře `/var/www/LearnEnglish/`. Příklad struktury proje
 
 ---
 
-## **3. Vytvoření a aktivace virtuálního prostředí**
+## **4. Vytvoření a aktivace virtuálního prostředí**
 ```python
 cd /var/www/LearnEnglish
 python3 -m venv venv
@@ -35,7 +56,7 @@ deactivate
 ```
 ---
 
-## **4. Vytvoření ukázkové Flask aplikace**
+## **5. Vytvoření ukázkové Flask aplikace**
 
 ### **Soubor `learnenglish.py`:**
 ```python
@@ -51,13 +72,14 @@ if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
 ```
 > [!TIP]
-> Případně si stáhněte aplikaci LearnEnglish z GitHUB pomocí příkazu
+> Případně si stáhněte aplikaci LearnEnglish z GitHUB pomocí příkazu. Více informací ohledně nastavení ssh, viz bod 12.
 ```bash
 git clone git@github.com:fajkusmarcel/LearnEnglish.git
 ```
+
 ---
 
-## **5. Vytvoření WSGI souboru**
+## **6. Vytvoření WSGI souboru**
 
 Vytvoř soubor `/var/www/LearnEnglish/learnenglish.wsgi` s následujícím obsahem:
 
@@ -77,7 +99,7 @@ except Exception as e:
 
 ---
 
-## **6. Konfigurace Apache**
+## **7. Konfigurace Apache**
 
 Vytvoř konfigurační soubor Apache:
 
@@ -113,7 +135,7 @@ sudo nano /etc/apache2/sites-available/learnenglish.conf
 
 ---
 
-## **7. Nastavení práv k souborům**
+## **8. Nastavení práv k souborům**
 
 Nastav správná práva k souborům aplikace:
 
@@ -121,10 +143,15 @@ Nastav správná práva k souborům aplikace:
 sudo chown -R www-data:www-data /var/www/LearnEnglish
 sudo chmod -R 755 /var/www/LearnEnglish
 ```
+Přidání uživatele do skupiny www-data
+```bash
+sudo usermod -a -G www-data fajkus
+```
+
 
 ---
 
-## **8. Aktivace konfigurace a restart Apache**
+## **9. Aktivace konfigurace a restart Apache**
 
 ### **Aktivace konfigurace:**
 ```bash
@@ -144,7 +171,7 @@ sudo systemctl restart apache2
 
 ---
 
-## **9. Testování aplikace**
+## **10. Testování aplikace**
 
 Otevři aplikaci v prohlížeči na adrese:
 ```
@@ -163,7 +190,7 @@ sudo tail -f /var/log/apache2/helloworldflaskapache_error.log
 
 ---
 
-## **10. Další kroky**
+## **11. Další kroky**
 
 Pokud aplikace funguje, je vhodné:
 - Nastavit HTTPS pomocí **Let's Encrypt** a **certbot**:
@@ -174,3 +201,53 @@ Pokud aplikace funguje, je vhodné:
 - Optimalizovat konfiguraci pro větší zátěž.
 
 ---
+
+## **12. Nastavení SSH klíče pro přístup k repozitáři**
+
+### 1. **Vytvoření SSH klíče**
+Vytvoř SSH klíč jako běžný uživatel (např. `franta`) pomocí následujícího příkazu:
+
+```bash
+ssh-keygen -t ed25519 -C "fajkusmarcel@gmail.com"
+```
+
+- Potvrď uložení do výchozího adresáře (`~/.ssh/id_ed25519`) stisknutím **Enter**.
+- Pokud chceš zabezpečit klíč heslem, zadej jej (jinak můžeš stisknout **Enter**).
+
+### 2. **Přidání klíče do SSH agenta**
+Pro snazší používání přidej privátní klíč do SSH agenta. Nejprve zkontroluj, zda agent běží:
+
+```bash
+eval "$(ssh-agent -s)"
+```
+
+Pokud se agent spustí, přidej do něj klíč:
+
+```bash
+ssh-add ~/.ssh/id_ed25519
+```
+
+Ověř, že klíč byl přidán správně:
+
+```bash
+ssh-add -l
+```
+
+### 3. **Otestování připojení k repozitáři**
+Otestuj připojení k GitHubu pomocí příkazu:
+
+```bash
+ssh -T git@github.com
+```
+
+Pokud je vše v pořádku, měl by se zobrazit výstup potvrzující úspěšnou autentizaci.
+
+### 4. **Stažení repozitáře**
+Nyní můžeš klonovat repozitář pomocí SSH URL:
+
+```bash
+git clone git@github.com:fajkusmarcel/LearnEnglish.git
+```
+
+Tento příkaz stáhne obsah repozitáře `LearnEnglish` do aktuálního adresáře.
+
