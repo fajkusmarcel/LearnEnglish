@@ -55,7 +55,7 @@ pip install flask
 deactivate
 ```
 > [!TIP]
-> Pro více informací oheldně práce s prostředím viz [Tutorial](Tutorial_environment.md./md)
+> Pro více informací oheldně práce s prostředím viz [Tutorial](Tutorial_environment.md)
 
 
 ---
