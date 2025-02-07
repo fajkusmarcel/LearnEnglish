@@ -26,19 +26,19 @@ pip3 install -r requirements.txt
 
 ## **2. Vytvoření složky pro aplikaci**
 
-Aplikaci ulož do adresáře `/var/www/LearnEnglish/`. Příklad struktury projektu:
+Aplikaci ulož do adresáře `/var/www/HelloWorldFlaskApache/`. Příklad struktury projektu:
 ```
-/var/www/LearnEnglish/
-    ├── LearnEnglish.py
+/var/www/HelloWorldFlaskApache/
     ├── __init__.py
-    └── learnenglish.wsgi
+    ├── helloworldflaskapache.py
+    └── helloworldflaskapache.wsgi
 ```
 
 ---
 
 ## **3. Vytvoření ukázkové Flask aplikace**
 
-### **Soubor `LearnEnglish.py`:**
+### **Soubor `helloworldflaskapache.py`:**
 ```python
 from flask import Flask
 
@@ -56,7 +56,7 @@ if __name__ == "__main__":
 
 ## **4. Vytvoření WSGI souboru**
 
-Vytvoř soubor `/var/www/LearnEnglish/learnenglish.wsgi` s následujícím obsahem:
+Vytvoř soubor `/var/www/HelloWorldFlaskApache/helloworldflaskapache.wsgi` s následujícím obsahem:
 
 ```python
 import sys
@@ -66,11 +66,11 @@ import logging
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
 # Přidej cestu k aplikaci
-sys.path.insert(0, '/var/www/LearnEnglish')
+sys.path.insert(0, '/var/www/HelloWorldFlaskApache')
 
 # Importuj aplikaci
 try:
-    from LearnEnglish import app as application
+    from helloworldflaskapache import app as application
 except Exception as e:
     logging.exception("Chyba při načítání aplikace")
     raise
@@ -83,7 +83,7 @@ except Exception as e:
 Vytvoř nebo uprav konfigurační soubor Apache:
 
 ```bash
-sudo nano /etc/apache2/sites-available/learnenglish.conf
+sudo nano /etc/apache2/sites-available/helloworldflaskapache.conf
 ```
 
 ### **Obsah konfigurace:**
@@ -91,19 +91,19 @@ sudo nano /etc/apache2/sites-available/learnenglish.conf
 <VirtualHost *:80>
     ServerName 158.196.109.151  # Nahraď IP adresou nebo doménou
 
-    DocumentRoot /var/www/LearnEnglish
+    DocumentRoot /var/www/HelloWorldFlaskApache
 
-    WSGIDaemonProcess learnenglish python-path=/var/www/LearnEnglish
-    WSGIScriptAlias / /var/www/LearnEnglish/learnenglish.wsgi
+    WSGIDaemonProcess helloworldflaskapache python-path=/var/www/HelloWorldFlaskApache
+    WSGIScriptAlias /helloworld /var/www/HelloWorldFlaskApache/helloworldflaskapache.wsgi
 
-    <Directory /var/www/LearnEnglish>
-        WSGIProcessGroup learnenglish
+    <Directory /var/www/HelloWorldFlaskApache>
+        WSGIProcessGroup helloworldflaskapache
         WSGIApplicationGroup %{GLOBAL}
         Require all granted
     </Directory>
 
-    ErrorLog ${APACHE_LOG_DIR}/learnenglish_error.log
-    CustomLog ${APACHE_LOG_DIR}/learnenglish_access.log combined
+    ErrorLog ${APACHE_LOG_DIR}/helloworldflaskapache_error.log
+    CustomLog ${APACHE_LOG_DIR}/helloworldflaskapache_access.log combined
 </VirtualHost>
 ```
 
@@ -114,8 +114,8 @@ sudo nano /etc/apache2/sites-available/learnenglish.conf
 Nastav správná práva k souborům aplikace:
 
 ```bash
-sudo chown -R www-data:www-data /var/www/LearnEnglish
-sudo chmod -R 755 /var/www/LearnEnglish
+sudo chown -R www-data:www-data /var/www/HelloWorldFlaskApache
+sudo chmod -R 755 /var/www/HelloWorldFlaskApache
 ```
 
 ---
@@ -124,7 +124,7 @@ sudo chmod -R 755 /var/www/LearnEnglish
 
 ### **Aktivace konfigurace:**
 ```bash
-sudo a2ensite learnenglish.conf
+sudo a2ensite helloworldflaskapache.conf
 ```
 
 ### **Restart Apache:**
@@ -144,17 +144,17 @@ sudo systemctl restart apache2
 
 Otevři aplikaci v prohlížeči na adrese:
 ```
-http://<IP_adresa_serveru>/
+http://<IP_adresa_serveru>/helloworld
 ```
 
 Případně spustď test přímo na serveru:
 ```bash
-curl -v http://localhost/
+curl -v http://localhost/helloworld
 ```
 
 Pokud narazíš na chybu **500 Internal Server Error**, zkontroluj logy Apache:
 ```bash
-sudo tail -f /var/log/apache2/learnenglish_error.log
+sudo tail -f /var/log/apache2/helloworldflaskapache_error.log
 ```
 
 ---
