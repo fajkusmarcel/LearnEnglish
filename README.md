@@ -2,24 +2,13 @@
 
 # Nasazeni Flask aplikace pres Apache server
 
-Tento dokument poskytuje kompletní návod pro instalaci Apache, Flask a konfiguraci WSGI pro nasazení jednoduché aplikace Flask na server.
+Tento návod poskytuje kompletní návod pro instalaci Apache, Flask a konfiguraci WSGI pro nasazení jednoduché aplikace Flask na server.
 
 ## **1. Instalace Apache a závislostí**
 
-### **Příkazy pro instalaci:**
 ```bash
 sudo apt update
 sudo apt-get install apache2 libapache2-mod-wsgi-py3 python3-pip python3-venv
-```
-
-### **Instalace Flasku:**
-```bash
-pip3 install flask
-```
-
-Pokud máš soubor `requirements.txt`, nainstaluj závislosti:
-```bash
-pip3 install -r requirements.txt
 ```
 
 ---
@@ -32,6 +21,9 @@ Aplikaci ulož do adresáře `/var/www/LearnEnglish/`. Příklad struktury proje
     ├── learnenglish.py
     └── learnenglish.wsgi
 ```
+
+---
+
 ## **3. Vytvoření a aktivace virtuálního prostředí**
 ```python
 cd /var/www/LearnEnglish
@@ -43,7 +35,7 @@ deactivate
 ```
 ---
 
-## **3. Vytvoření ukázkové Flask aplikace**
+## **4. Vytvoření ukázkové Flask aplikace**
 
 ### **Soubor `learnenglish.py`:**
 ```python
@@ -63,11 +55,9 @@ if __name__ == "__main__":
 ```bash
 git clone git@github.com:fajkusmarcel/LearnEnglish.git
 ```
-
-
 ---
 
-## **4. Vytvoření WSGI souboru**
+## **5. Vytvoření WSGI souboru**
 
 Vytvoř soubor `/var/www/LearnEnglish/learnenglish.wsgi` s následujícím obsahem:
 
@@ -87,7 +77,7 @@ except Exception as e:
 
 ---
 
-## **5. Konfigurace Apache**
+## **6. Konfigurace Apache**
 
 Vytvoř konfigurační soubor Apache:
 
@@ -123,7 +113,7 @@ sudo nano /etc/apache2/sites-available/learnenglish.conf
 
 ---
 
-## **6. Nastavení práv k souborům**
+## **7. Nastavení práv k souborům**
 
 Nastav správná práva k souborům aplikace:
 
@@ -134,7 +124,7 @@ sudo chmod -R 755 /var/www/LearnEnglish
 
 ---
 
-## **7. Aktivace konfigurace a restart Apache**
+## **78. Aktivace konfigurace a restart Apache**
 
 ### **Aktivace konfigurace:**
 ```bash
@@ -154,7 +144,7 @@ sudo systemctl restart apache2
 
 ---
 
-## **8. Testování aplikace**
+## **9. Testování aplikace**
 
 Otevři aplikaci v prohlížeči na adrese:
 ```
@@ -173,7 +163,7 @@ sudo tail -f /var/log/apache2/helloworldflaskapache_error.log
 
 ---
 
-## **9. Další kroky**
+## **10. Další kroky**
 
 Pokud aplikace funguje, je vhodné:
 - Nastavit HTTPS pomocí **Let's Encrypt** a **certbot**:
