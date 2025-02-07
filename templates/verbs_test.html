@@ -8,7 +8,7 @@
 <body>
     <div class="page-container">
         <h1>Test sloves</h1>
-        <form action="/submit_verbs_test" method="POST">
+        <form action="{{ url_for('submit_verbs_test') }}" method="POST">
             {% for question in questions %}
                 <div class="question-item">
                     <p>Přelož sloveso <strong>{{ question.word }}</strong> ve tvaru <strong>{{ question.tense }}</strong>:</p>

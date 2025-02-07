@@ -8,7 +8,7 @@
 <body>
     <div class="page-container">
         <h1>Test slovní zásoby</h1>
-        <form action="/submit_test" method="POST" class="questions-container">
+        <form action="{{ url_for('submit_test') }}" method="POST" class="questions-container">
             {% for word in words %}
                 <input type="hidden" name="test_word_{{ loop.index }}" value="{{ word[0] }};{{ word[1] }}">
                 <div class="question-item">

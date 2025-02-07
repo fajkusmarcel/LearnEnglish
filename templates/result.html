@@ -39,7 +39,9 @@
 
     <script>
         function saveImportantWord(category, word, correctAnswer, rowId) {
-            fetch('/save_important_word', {
+            
+
+            fetch("{{ url_for('save_important_word') }}", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
