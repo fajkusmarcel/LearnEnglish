@@ -1,8 +1,8 @@
 # LearnEnglish
 
-# Nasazeni Flask aplikace pres Apache server
+# Nasazeni LearnEnglish aplikace na Apache server
 
-Tento návod poskytuje kompletní návod pro instalaci Apache, Flask a konfiguraci WSGI pro nasazení jednoduché aplikace Flask na server.
+Tento návod poskytuje kompletní návod pro instalaci Apache, Flask a konfiguraci WSGI pro nasazení Flask aplikace LeanrEnglish na server Apache2.
 
 ## **1. Instalace Apache a závislostí**
 
@@ -55,7 +55,7 @@ pip install flask
 deactivate
 ```
 > [!TIP]
-> Pro více informací oheldně práce s prostředím viz [Tutorial](Tutorial_environment.md)
+> Pro více informací oheldně práce s prostředím viz [Tutorial](env.md)
 
 
 ---
@@ -237,7 +237,23 @@ Ověř, že klíč byl přidán správně:
 ssh-add -l
 ```
 
-### 3. **Otestování připojení k repozitáři**
+## **12. Git**
+
+### 1. Instalace git
+
+Instalace GIT
+```bash
+sudo apt update 
+sudo apt install git
+```
+
+Nastav si své jméno a e-mail, které se budou používat při commitech:
+```bash
+git config --global user.name "MarcelFajkus"
+git config --global user.email "fajkusmarcel@gmail.com"
+```
+
+### 2. Ověření funkčnosti
 Otestuj připojení k GitHubu pomocí příkazu:
 
 ```bash
@@ -246,7 +262,7 @@ ssh -T git@github.com
 
 Pokud je vše v pořádku, měl by se zobrazit výstup potvrzující úspěšnou autentizaci.
 
-### 4. **Stažení repozitáře**
+### 3. **Stažení repozitáře**
 Nyní můžeš klonovat repozitář pomocí SSH URL:
 
 ```bash
@@ -255,12 +271,3 @@ git clone git@github.com:fajkusmarcel/LearnEnglish.git
 
 Tento příkaz stáhne obsah repozitáře `LearnEnglish` do aktuálního adresáře.
 
-DOPLNIT
-sudo apt update 
-sudo apt install git
-
-Nastav si své jméno a e-mail, které se budou používat při commitech:
-git config --global user.name "MarcelFajkus"
-git config --global user.email "fajkusmarcel@gmail.com"
-Zobrazení konfigurace
-git config –list
