@@ -21,6 +21,8 @@ categories = {
 words = []
 verbs = []
 
+
+
 learned_words = set()
 wrong_words = []
 important_words = []
