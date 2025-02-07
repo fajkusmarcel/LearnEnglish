@@ -54,6 +54,10 @@ pip install flask
 # Po instalaci potřebných balíčků se můžeš odpojit:
 deactivate
 ```
+> [!TIP]
+> Pro více informací oheldně práce s prostředím viz [Tutorial](Tutorial_environment.md./md)
+
+
 ---
 
 ## **5. Vytvoření ukázkové Flask aplikace**
