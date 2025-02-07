@@ -408,7 +408,7 @@ def save_wrong_words(category):
 def save_important_words(category):
     # ZKONTROLOVAT
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    important_filename = os.ghpath.join(base_dir, get_json_filenames(category)[2])
+    important_filename = os.path.join(base_dir, get_json_filenames(category)[2])
 
     #important_filename = get_json_filenames(category)[2]
     with open(important_filename, 'w', encoding='utf-8') as file:
@@ -424,7 +424,7 @@ def load_verbs(category):
     global verbs
     verbs = []
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    filename = os.ghpath.join(base_dir, 'dataset', f'{category}.csv')
+    filename = os.path.join(base_dir, 'dataset', f'{category}.csv')
     #filename = f"dataset/{category}.csv"
     try:
         with open(filename, encoding='utf-8') as file:
