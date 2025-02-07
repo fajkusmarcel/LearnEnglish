@@ -78,7 +78,7 @@ if __name__ == "__main__":
 > [!TIP]
 > Případně si stáhněte aplikaci LearnEnglish z GitHUB pomocí příkazu. Více informací ohledně nastavení ssh, viz bod 12.
 ```bash
-git clone git@github.com:fajkusmarcel/LearnEnglish.git
+git clone git@github.com:franta/LearnEnglish.git
 ```
 
 ---

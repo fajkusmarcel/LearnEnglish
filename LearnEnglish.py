@@ -6,6 +6,9 @@ import os
 import random
 
 app = Flask(__name__)
+# Cesta k aplikaci na serveru 
+app.config['APPLICATION_ROOT'] = '/learnenglish'
+
 
 # Globální proměnné
 categories = {
