@@ -406,7 +406,10 @@ def save_wrong_words(category):
 
 # Uložení dulezitych slov pro danou kategorii
 def save_important_words(category):
-    important_filename = get_json_filenames(category)[2]
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    important_filename = os.ghpath.join(base_dir, get_json_filenames(category)[2])
+
+    #important_filename = get_json_filenames(category)[2]
     with open(important_filename, 'w', encoding='utf-8') as file:
         json.dump(important_filename, file, ensure_ascii=False, indent=4)
 
