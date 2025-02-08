@@ -56,7 +56,7 @@ pip install flask
 deactivate
 ```
 > [!TIP]
-> Pro více informací oheldně práce s prostředím viz [Tutorial](env.md)
+> Pro více informací oheldně práce s viirtuálním prostředím viz [Tutorial](env.md)
 
 
 ---
@@ -77,7 +77,7 @@ if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
 ```
 > [!TIP]
-> Případně si stáhněte aplikaci LearnEnglish z GitHUB pomocí příkazu `git clone`. Více informací ohledně nastavení ssh, viz bod 12.
+> Případně si stáhněte aplikaci LearnEnglish z GitHUB pomocí příkazu `git clone`. Více informací ohledně nastavení ssh, viz bod 11 a práce s `git` viz bod 12.
 ```bash
 git clone git@github.com:franta/LearnEnglish.git
 ```
